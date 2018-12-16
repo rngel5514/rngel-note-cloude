@@ -1,0 +1,8 @@
+Failed to connect to the database:could not connect to server
+service postgresql start 
+ss -lntp|grep post
+grep "port=" /etc/postgresql/10/main/postgresql.conf
+port = 5432 //5433 error
+sed?
+service postgresql restart
+msfdb reinit 

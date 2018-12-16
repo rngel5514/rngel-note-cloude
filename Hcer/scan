@@ -1,0 +1,19 @@
+﻿http://www.cnblogs.com/zixuanfy/p/5988685.html
+Nmap扫描：
+	-sS (TCP SYN扫描) 默认是TCP 
+	-sT (TCP connect()扫描)
+	-sU(UDP扫描)
+	-sV(版本扫描)
+	-sN; -sF; -sX (TCP Null，FIN，and Xmas扫描)
+	-sA (TCP ACK扫描)
+	-sW (TCP窗口扫描)
+	--scanflags (定制的TCP扫描)
+	-sI <zombie host[:probeport]> (Idlescan)
+	-sO (IP协议扫描)
+	-b <ftp relay host> (FTP弹跳扫描)
+SQLmap :
+    sqlmap -u "http://192.168.0.207:80/controller/loginCtrl.php" --method POST --data="userid=admin&password=1"  --dbms=mysql
+
+Nessue扫描：
+Openvas: load open_vas
+wmap web扫描

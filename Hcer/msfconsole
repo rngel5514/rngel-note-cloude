@@ -1,0 +1,16 @@
+msfconsole
+msfdb init 
+db_status
+workspace -a //add -d delete
+workspace + name //切换
+db_
+db_nmap
+db_import nmapScan.xml
+db_export -f *.xml //XML
+hosts //显示保存的主机
+hosts -c address,os_name
+services // -c 
+hosts -S Linux -o /root/Linux.csv //导出CSV
+creds
+
+

