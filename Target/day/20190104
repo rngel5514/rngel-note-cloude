@@ -1,0 +1,62 @@
+tcpdump 常用命令
+	tcpdump -i eth0 -Z root //tcpdump 需要root的权限 以及tcpdump 是在2层抓包 早于防火墙
+	tcpdump -i eht0 -Z root host 192.168.150.227 -w hello.cap
+	tcpdump -adeflnNOpqStvx -c 数量 -F 文件名 -i 网络接口 -r 文件名 -s snaplen -T 类型 -w 文件名 表达式
+传统路由:
+		route -n
+		man route 
+		route add|del -net 10.20.30.40/25 eth0
+		route add -host 192.168.1.2 gw 192.168.1.1
+		route add default gw 192.168.1.1 
+		添加路由
+		数据包转发 
+		sysctl -w net.ipv4.ip_forward =1 // vi /etc/sysctl.conf 
+策略路由的常用内容
+	iproute 
+		ip -V 
+		显示策略数据库中的所有表 ip rule show
+								 ip rule show table main
+								默认三张表: local main default
+								local:路由表local包含本机路由及广播信息
+								main:使用传统命令route -n所看到的路由表就是main的内容 默认使用的路由表
+								default:默认内容为空
+		添加路由表:
+		ip rule add dev eth2 table 1
+		ip rule add dev eth0 table 2
+		ip rule add from 192.168.1.0/24 table 3
+		ip rule add from 192.168.2.0/24 table 4
+		ip rule add from 192.168.3.0/24 table 5 prio 10
+		删除路由表
+		ip rule del prio 10
+		ip rule del from 192.168.1.0/24
+		ip rule del table 1
+		添加路由
+		ip route add from 192.168.150.0/24 via 192.168.150.229 table main
+		ip route add from 192.168.179.0/24 dev eth1 table 10
+		添加默认路由
+		ip route add default via 192.168.1.254 table 10 
+		删除路由
+		ip route del default table 10
+		ip route del 192.168.1.0/24 table 10
+		添加路由
+l2tp/ppp相关内容
+		二层协议 数据链路层
+		tcp(传输层 segment ) ip(分组 数据包 packet 最大1520) PPP/L2TP-> UDP -> ip -> 以太网 
+		l2tp + IPsec :
+					tcp ip PPP L2TP uDP (IPSec IP 网络层) Ether
+		vpn 同网段 无法直接发送数据包 问题
+		原因 arp 广播无法找到真是mac地址
+		解决 Proxy ARP
+		IPsec  IKE SA密钥协商
+		拨号网络默认网管问题
+		IPsec 链接穿透NAT问题在IPsec 之后重新添加UDP报头解决穿透密
+
+	l2tp配置的相关内容
+	tunnel
+内网穿透
+网卡别名
+	winodws 高级添加
+	linux eth0:0 eth0:1 eth0:2 重启失效
+			经常使用linux 网口别名 需写入配置文件中ifeht0之类的
+RDP:
+	mstsc.exe Windows 远程连接  需要在对方主机 计算机属性里打开远程链接窗口 (无法穿透内网)
